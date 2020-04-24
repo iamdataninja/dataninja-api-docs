@@ -21,7 +21,7 @@
  * @apiVersion 0.0.1
  *
  * @apiParam {String="sub","own","new"} domain_type Domain Register type
- * @apiParam {String[]} domains Registered Domains: <br> If sub: <code>[mysub1,mysub2]</code>, <br> If own: <code>[mydomain1.ge, mydomain2.ge]</code>  <br> If new: <code>[mynewdomain.ge]</code>
+ * @apiParam {String} domain Registered Domain: <strong>sub:</strong> <code>mysub1</code>, <strong>own:</strong>: <code>mydomain1.ge</code>, <strong>new:</strong>: <code>mynewdomain.ge</code>
  *
  * @apiUse Errors
  * @apiUse Secured

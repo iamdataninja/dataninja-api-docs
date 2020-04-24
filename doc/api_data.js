@@ -23,10 +23,10 @@ define({ "api": [
           },
           {
             "group": "Parameter",
-            "type": "String[]",
+            "type": "String",
             "optional": false,
-            "field": "domains",
-            "description": "<p>Registered Domains: <br> If sub: <code>[mysub1,mysub2]</code>, <br> If own: <code>[mydomain1.ge, mydomain2.ge]</code>  <br> If new: <code>[mynewdomain.ge]</code></p>"
+            "field": "domain",
+            "description": "<p>Registered Domain: <strong>sub:</strong> <code>mysub1</code>, <strong>own:</strong>: <code>mydomain1.ge</code>, <strong>new:</strong>: <code>mynewdomain.ge</code></p>"
           }
         ]
       }

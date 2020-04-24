@@ -2,7 +2,7 @@
  * @api {get} /page/config 1. Get Page Config
  * @apiDescription Returns menu config, header config & footer config.
  * @apiName PageConfig
- * @apiGroup PageConfig
+ * @apiGroup 3. PageConfig
  * @apiVersion 0.0.1
  *
  * @apiSuccess {Boolean} success Request Success

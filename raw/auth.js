@@ -28,26 +28,10 @@
  */
 
 /**
- * @api {post} /register 1. User Registration
- * @apiName RegisterUser
- * @apiGroup Authentication
- * @apiVersion 0.0.1
- *
- * @apiParam {String} name User Name <code> max: 70 </code>
- * @apiParam {String} email User Email <code> max: 70 </code>
- * @apiParam {String} password User Password <code> min: 6 , max: 30 </code>
- * @apiParam {String} password_confirmation Password Comfirmation <code> =password </code>
- *
- * @apiUse AuthenticationSuccess
- *
- * @apiUse Errors
- */
-
-/**
- * @api {post} /login 2. Login User by credentials
+ * @api {post} /login 1. Login User by credentials
  * @apiDescription Example Token: <code>d4uq1id9jynhne295dc758649859d5f940885287932f79xnytrrc97v</code>
  * @apiName bLoginUser
- * @apiGroup Authentication
+ * @apiGroup 2. Authentication
  * @apiVersion 0.0.1
  *
  * @apiParam {String} email="admin@admin.com" User email
@@ -60,9 +44,9 @@
  */
 
 /**
- * @api {post} /user 3. Get Current user
+ * @api {post} /user 2. Get Current user
  * @apiName GetUser
- * @apiGroup Authentication
+ * @apiGroup 2. Authentication
  * @apiDescription Used for token validation. If token is incorrect then this returns 401 Unauthentiacated
  * @apiVersion 0.0.1
  *
@@ -79,9 +63,9 @@
  */
 
 /**
- * @api {post} /logout 4. Logout Current User
+ * @api {post} /logout 3. Logout Current User
  * @apiName LogoutUser
- * @apiGroup Authentication
+ * @apiGroup 2. Authentication
  * @apiVersion 0.0.1
  *
  * @apiSuccess {Boolean} success Request Success

@@ -1,112 +1,58 @@
 [
   {
     "type": "post",
-    "url": "/user",
-    "title": "3. Get Current user",
-    "name": "GetUser",
-    "group": "Authentication",
-    "description": "<p>Used for token validation. If token is incorrect then this returns 401 Unauthentiacated</p>",
+    "url": "/register/step/domain",
+    "title": "2. Add Domain Step",
+    "name": "DomainStep",
+    "group": "1.Registration",
     "version": "0.0.1",
-    "success": {
+    "parameter": {
       "fields": {
-        "Success 200": [
+        "Parameter": [
           {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>Request Success</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Object",
-            "optional": false,
-            "field": "user",
-            "description": "<p>Logged In User</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "user.id",
-            "description": "<p>User Id</p>"
-          },
-          {
-            "group": "Success 200",
+            "group": "Parameter",
             "type": "String",
+            "allowedValues": [
+              "\"sub\"",
+              "\"own\"",
+              "\"new\""
+            ],
             "optional": false,
-            "field": "user.name",
-            "description": "<p>User Name</p>"
+            "field": "domain_type",
+            "description": "<p>Domain Register type</p>"
           },
           {
-            "group": "Success 200",
-            "type": "String",
+            "group": "Parameter",
+            "type": "String[]",
             "optional": false,
-            "field": "user.email",
-            "description": "<p>User Email</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "user.language",
-            "description": "<p>User Preffered Language Code</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "user.token",
-            "description": "<p>Generated Access Token</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "token",
-            "description": "<p>Generated Access Token</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "expires_at",
-            "description": "<p>Timestamps In milliseconds when token expires</p>"
+            "field": "domains",
+            "description": "<p>Registered Domains: <br> If sub: <code>[mysub1,mysub2]</code>, <br> If own: <code>[mydomain1.ge, mydomain2.ge]</code>  <br> If new: <code>[mynewdomain.ge]</code></p>"
           }
         ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"user\": {\n     \"id\": 1,\n     \"name\": \"Username\",\n     \"email\": \"exampl@gmail.com\",\n     \"language\": \"en\",\n     \"token\": \"[some token here]\"\n   },\n   \"token\": \"[some token here]\",\n   \"expires_at\": 1587165099\n}",
-          "type": "json"
-        }
-      ]
+      }
     },
-    "filename": "raw/auth.js",
-    "groupTitle": "Authentication",
+    "filename": "raw/register.js",
+    "groupTitle": "1.Registration",
     "sampleRequest": [
       {
-        "url": "https://davikar.ge/api/user"
+        "url": "https://davikar.ge/api/register/step/domain"
       }
     ],
-    "header": {
-      "fields": {
-        "Header": [
-          {
-            "group": "Header",
-            "type": "String",
-            "optional": false,
-            "field": "Authorization",
-            "defaultValue": "Bearer ",
-            "description": "<p>Bearer user token</p>"
-          }
-        ]
-      }
-    },
     "error": {
       "fields": {
         "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ServerError",
+            "description": "<p>Something unexpected happened</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Provided data is invalid</p>"
+          },
           {
             "group": "Error 4xx",
             "optional": false,
@@ -117,50 +63,33 @@
       },
       "examples": [
         {
+          "title": "Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server error\n{\n  \"status\": 500,\n  \"success\": false,\n  \"error\": \"[error message here]\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Unprocessable Entity",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"success\": false,\n  \"errors\": {\n     \"param_name\": \"error text\",\n     \"param_name2\": \"error text\",\n     ...\n   },\n  \"status\": 422\n}",
+          "type": "json"
+        },
+        {
           "title": "Unauthorized",
           "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
           "type": "json"
         }
       ]
-    }
-  },
-  {
-    "type": "post",
-    "url": "/logout",
-    "title": "4. Logout Current User",
-    "name": "LogoutUser",
-    "group": "Authentication",
-    "version": "0.0.1",
-    "success": {
-      "fields": {
-        "Success 200": [
-          {
-            "group": "Success 200",
-            "type": "Boolean",
-            "optional": false,
-            "field": "success",
-            "description": "<p>Request Success</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true\n}",
-          "type": "json"
-        }
-      ]
     },
-    "filename": "raw/auth.js",
-    "groupTitle": "Authentication",
-    "sampleRequest": [
-      {
-        "url": "https://davikar.ge/api/logout"
-      }
-    ],
     "header": {
       "fields": {
         "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Accept",
+            "defaultValue": "application/json",
+            "description": "<p>Bearer user token</p>"
+          },
           {
             "group": "Header",
             "type": "String",
@@ -171,25 +100,6 @@
           }
         ]
       }
-    },
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "optional": false,
-            "field": "Unauthorized",
-            "description": "<p>Token incorrect or expired</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Unauthorized",
-          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
-          "type": "json"
-        }
-      ]
     }
   },
   {
@@ -197,7 +107,7 @@
     "url": "/register",
     "title": "1. User Registration",
     "name": "RegisterUser",
-    "group": "Authentication",
+    "group": "1.Registration",
     "version": "0.0.1",
     "parameter": {
       "fields": {
@@ -233,8 +143,8 @@
         ]
       }
     },
-    "filename": "raw/auth.js",
-    "groupTitle": "Authentication",
+    "filename": "raw/register.js",
+    "groupTitle": "1.Registration",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/register"
@@ -363,11 +273,204 @@
   },
   {
     "type": "post",
+    "url": "/user",
+    "title": "2. Get Current user",
+    "name": "GetUser",
+    "group": "2._Authentication",
+    "description": "<p>Used for token validation. If token is incorrect then this returns 401 Unauthentiacated</p>",
+    "version": "0.0.1",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>Logged In User</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user.id",
+            "description": "<p>User Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.name",
+            "description": "<p>User Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.email",
+            "description": "<p>User Email</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.language",
+            "description": "<p>User Preffered Language Code</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.token",
+            "description": "<p>Generated Access Token</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Generated Access Token</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "expires_at",
+            "description": "<p>Timestamps In milliseconds when token expires</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"user\": {\n     \"id\": 1,\n     \"name\": \"Username\",\n     \"email\": \"exampl@gmail.com\",\n     \"language\": \"en\",\n     \"token\": \"[some token here]\"\n   },\n   \"token\": \"[some token here]\",\n   \"expires_at\": 1587165099\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/auth.js",
+    "groupTitle": "2._Authentication",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/user"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/logout",
+    "title": "3. Logout Current User",
+    "name": "LogoutUser",
+    "group": "2._Authentication",
+    "version": "0.0.1",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/auth.js",
+    "groupTitle": "2._Authentication",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/logout"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
     "url": "/login",
-    "title": "2. Login User by credentials",
+    "title": "1. Login User by credentials",
     "description": "<p>Example Token: <code>d4uq1id9jynhne295dc758649859d5f940885287932f79xnytrrc97v</code></p>",
     "name": "bLoginUser",
-    "group": "Authentication",
+    "group": "2._Authentication",
     "version": "0.0.1",
     "parameter": {
       "fields": {
@@ -392,7 +495,7 @@
       }
     },
     "filename": "raw/auth.js",
-    "groupTitle": "Authentication",
+    "groupTitle": "2._Authentication",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/login"
@@ -536,7 +639,7 @@
     "title": "1. Get Page Config",
     "description": "<p>Returns menu config, header config &amp; footer config.</p>",
     "name": "PageConfig",
-    "group": "PageConfig",
+    "group": "3._PageConfig",
     "version": "0.0.1",
     "success": {
       "fields": {
@@ -587,7 +690,7 @@
       ]
     },
     "filename": "raw/config.js",
-    "groupTitle": "PageConfig",
+    "groupTitle": "3._PageConfig",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/page/config"

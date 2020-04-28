@@ -893,5 +893,207 @@
         }
       ]
     }
+  },
+  {
+    "type": "post",
+    "url": "/ads/create",
+    "title": "2. Create Ad",
+    "name": "CreateAd",
+    "group": "4._Ads",
+    "version": "0.0.1",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Ad Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "label",
+            "description": "<p>Ad Label</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "allowedValues": [
+              "\"facebook\"",
+              "\"google\""
+            ],
+            "optional": false,
+            "field": "network",
+            "description": "<p>Ad Network</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "landing_page",
+            "description": "<p>Landing page</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String[object]",
+            "optional": false,
+            "field": "additional_params",
+            "description": "<p>Additional parameters in url</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "audience_template",
+            "description": "<p>Audience template [select field]</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "request",
+            "description": "<p>Given Request  [for testing ]</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/api.js",
+    "groupTitle": "4._Ads",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/ads/create"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/ads",
+    "title": "1. Get All User Ads",
+    "name": "GetAllAds",
+    "group": "4._Ads",
+    "version": "0.0.1",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object[]",
+            "optional": false,
+            "field": "ads",
+            "description": "<p>Returned ads</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"ads\": [\n     \"name\": \"my ad name\",\n     \"label\": \"my ad label\",\n     \"created_at\": \"2020-04-25 14:33:45\",\n     ...\n  ],\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/api.js",
+    "groupTitle": "4._Ads",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/ads"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
   }
 ]

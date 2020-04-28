@@ -466,6 +466,170 @@
   },
   {
     "type": "post",
+    "url": "/user/edit",
+    "title": "4. User Settings",
+    "name": "UserSetting",
+    "group": "2._Authentication",
+    "version": "0.0.1",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Edited Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Edited Email</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "password",
+            "description": "<p>Old Password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "password_new",
+            "description": "<p>New password [if password change required]</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "password_new_confirmation",
+            "description": "<p>New Password Confirmation</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "allowedValues": [
+              "\"m\"",
+              "\"f\""
+            ],
+            "optional": true,
+            "field": "gender",
+            "description": "<p>User Gender</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address1",
+            "description": "<p>Address Line 1</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "address2",
+            "description": "<p>Address Line 2</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/auth.js",
+    "groupTitle": "2._Authentication",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/user/edit"
+      }
+    ],
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ServerError",
+            "description": "<p>Something unexpected happened</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Provided data is invalid</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server error\n{\n  \"status\": 500,\n  \"success\": false,\n  \"error\": \"[error message here]\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Unprocessable Entity",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"success\": false,\n  \"errors\": {\n     \"param_name\": \"error text\",\n     \"param_name2\": \"error text\",\n     ...\n   },\n  \"status\": 422\n}",
+          "type": "json"
+        },
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Accept",
+            "defaultValue": "application/json",
+            "description": "<p>Bearer user token</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "post",
     "url": "/login",
     "title": "1. Login User by credentials",
     "description": "<p>Example Token: <code>d4uq1id9jynhne295dc758649859d5f940885287932f79xnytrrc97v</code></p>",

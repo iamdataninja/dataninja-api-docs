@@ -76,3 +76,28 @@
  *     }
  * @apiUse Secured
  */
+
+/**
+ * @api {post} /user/edit 4. User Settings
+ * @apiName UserSetting
+ * @apiGroup 2. Authentication
+ * @apiVersion 0.0.1
+ *
+ * @apiParam {String} name Edited Name
+ * @apiParam {String} email Edited Email
+ * @apiParam {String} [password] Old Password
+ * @apiParam {String} [password_new] New password [if password change required]
+ * @apiParam {String} [password_new_confirmation] New Password Confirmation
+ * @apiParam {String="m","f"} [gender] User Gender
+ * @apiParam {String} [address1] Address Line 1
+ * @apiParam {String} [address2] Address Line 2
+ *
+ * @apiSuccess {Boolean} success Request Success
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true
+ *     }
+ * @apiUse Errors
+ * @apiUse Secured
+ */

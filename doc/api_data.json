@@ -897,7 +897,7 @@
   {
     "type": "post",
     "url": "/ads/create",
-    "title": "2. Create Ad",
+    "title": "3. Create Ad",
     "name": "CreateAd",
     "group": "4._Ads",
     "version": "0.0.1",
@@ -1062,6 +1062,407 @@
         "url": "https://davikar.ge/api/ads"
       }
     ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/ads/new",
+    "title": "2. Get Config for new AD",
+    "name": "StartedAdCreation",
+    "group": "4._Ads",
+    "version": "0.0.1",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>New Ad Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "fields",
+            "description": "<p>Array of user Dynamic fields</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "categories",
+            "description": "<p>Ad Type Categories</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "audiences",
+            "description": "<p>User Defined Audiences</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"name\": \"Some Unique Name\",\n  \"fields\": [\n     \"id\": 1,\n     \"name\": \"Country\",\n     \"type\": \"Select\",\n     \"options\": [\n         {\n           \"id\": 1,\n           \"value\": \"Georgia\",\n         }\n     ],\n  ],\n  \"categories\": {\n     \"key\": Value\",\n     \"key2\": Value2\"\n  },\n  \"audiences\": {\n     \"key\": Value\",\n     \"key2\": Value2\"\n  }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/api.js",
+    "groupTitle": "4._Ads",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/ads/new"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "post",
+    "url": "/user/fields",
+    "title": "1. Create Or Edit Fields",
+    "name": "Create/Edit_User_Fields",
+    "group": "5._Settings",
+    "version": "0.0.1",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Array[Field]",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Containnig all fields</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "data.field.id",
+            "description": "<p>Field Id (If field already created and needs to be edited)</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "data.field.name",
+            "description": "<p>Field Name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "allowedValues": [
+              "\"text\"",
+              "\"select\"",
+              "\"radio\"",
+              "\"checkbox\"",
+              "\"multiple\""
+            ],
+            "optional": false,
+            "field": "data.field.type",
+            "description": "<p>Field Type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": true,
+            "field": "data.field.options",
+            "description": "<p>If Field type is not text array of possible values</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": true,
+            "field": "data.field.options.id",
+            "description": "<p>Id of given option</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Array",
+            "optional": false,
+            "field": "data.field.options.value",
+            "description": "<p>Value of given option</p>"
+          }
+        ]
+      }
+    },
+    "filename": "raw/api.js",
+    "groupTitle": "5._Settings",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/user/fields"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          },
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Accept",
+            "defaultValue": "application/json",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ServerError",
+            "description": "<p>Something unexpected happened</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "ValidationError",
+            "description": "<p>Provided data is invalid</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        },
+        {
+          "title": "Internal Server Error",
+          "content": "HTTP/1.1 500 Internal Server error\n{\n  \"status\": 500,\n  \"success\": false,\n  \"error\": \"[error message here]\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Unprocessable Entity",
+          "content": "HTTP/1.1 422 Unprocessable Entity\n{\n  \"success\": false,\n  \"errors\": {\n     \"param_name\": \"error text\",\n     \"param_name2\": \"error text\",\n     ...\n   },\n  \"status\": 422\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array[Field]",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Containnig all fields</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.field.id",
+            "description": "<p>Field Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.field.name",
+            "description": "<p>Field Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.field.type",
+            "description": "<p>Field Type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.field.options",
+            "description": "<p>If Field type is not text returns array of possible values</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.feild.options.id",
+            "description": "<p>Id of given option</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.feild.options.value",
+            "description": "<p>Value of given option</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": [\n     \"id\": 1,\n     \"name\": \"Country\",\n     \"type\": \"Select\",\n     \"options\": [\n         {\n           \"id\": 1,\n           \"value\": \"Georgia\",\n         }\n     ],\n  ],\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/user/fields",
+    "title": "2. Get User Fields",
+    "name": "Get_User_Fields",
+    "group": "5._Settings",
+    "version": "0.0.1",
+    "filename": "raw/api.js",
+    "groupTitle": "5._Settings",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/user/fields"
+      }
+    ],
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Array[Field]",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Containnig all fields</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.field.id",
+            "description": "<p>Field Id</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.field.name",
+            "description": "<p>Field Name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "data.field.type",
+            "description": "<p>Field Type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.field.options",
+            "description": "<p>If Field type is not text returns array of possible values</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "data.feild.options.id",
+            "description": "<p>Id of given option</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.feild.options.value",
+            "description": "<p>Value of given option</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": [\n     \"id\": 1,\n     \"name\": \"Country\",\n     \"type\": \"Select\",\n     \"options\": [\n         {\n           \"id\": 1,\n           \"value\": \"Georgia\",\n         }\n     ],\n  ],\n}",
+          "type": "json"
+        }
+      ]
+    },
     "header": {
       "fields": {
         "Header": [

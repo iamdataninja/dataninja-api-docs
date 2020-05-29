@@ -31,7 +31,7 @@
  * @api {post} /login 1. Login User by credentials
  * @apiDescription Example Token: <code>d4uq1id9jynhne295dc758649859d5f940885287932f79xnytrrc97v</code>
  * @apiName bLoginUser
- * @apiGroup 2. Authentication
+ * @apiGroup 2. User
  * @apiVersion 0.0.1
  *
  * @apiParam {String} email="admin@admin.com" User email
@@ -46,7 +46,7 @@
 /**
  * @api {post} /user 2. Get Current user
  * @apiName GetUser
- * @apiGroup 2. Authentication
+ * @apiGroup 2. User
  * @apiDescription Used for token validation. If token is incorrect then this returns 401 Unauthentiacated
  * @apiVersion 0.0.1
  *
@@ -65,7 +65,7 @@
 /**
  * @api {post} /logout 3. Logout Current User
  * @apiName LogoutUser
- * @apiGroup 2. Authentication
+ * @apiGroup 2. User
  * @apiVersion 0.0.1
  *
  * @apiSuccess {Boolean} success Request Success
@@ -80,7 +80,7 @@
 /**
  * @api {post} /user/edit 4. User Settings
  * @apiName UserSetting
- * @apiGroup 2. Authentication
+ * @apiGroup 2. User
  * @apiVersion 0.0.1
  *
  * @apiParam {String} name Edited Name
@@ -99,5 +99,54 @@
  *       "success": true
  *     }
  * @apiUse Errors
+ * @apiUse Secured
+ */
+
+/**
+ * @api {get} /user/save-token 5. Save User Facebook Token
+ * @apiDescription Saves facebook token in database
+ * @apiName SaveFbToken
+ * @apiGroup 2. User
+ * @apiVersion 0.0.1
+ *
+ * @apiSuccess {Boolean} success Request Success
+ *
+ * @apiParam {String} token Facebook token
+ * @apiParam {String} user_id Facebook User Account Id
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true,
+ *     }
+ * @apiUse Secured
+ */
+
+/**
+ * @api {get} /user/config 6. Get User Config
+ * @apiDescription Get Fields, Accounts, pages and etc...
+ * @apiName GetToken
+ * @apiGroup 2. User
+ * @apiVersion 0.0.1
+ *
+ * @apiSuccess {Boolean} success Request Success
+ * @apiSuccess {Obejct} data Request Data
+ * @apiSuccess {Array} data.fields User fields
+ * @apiSuccess {Array} data.fields.options User field Options
+ * @apiSuccess {Array} data.pages User Pages
+ * @apiSuccess {Array} data.accounts User Accounts
+ *
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *       "success": true,
+ *       "data": {
+ *         "fields": [],
+ *         "pages": [],
+ *         "accounts": [],
+ *       },
+ *     }
+ *
  * @apiUse Secured
  */

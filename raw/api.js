@@ -119,7 +119,7 @@
  * @apiGroup 5. Settings
  * @apiVersion 0.0.1
  *
- * @apiDesc Create Or edit user fields, if field id is present then field will be edited If not field will be created
+ * @apiDescription Create Or edit user fields, if field id is present then field will be edited If not field will be created
  *
  * @apiParam {Array[Field]} data Containnig all fields
  * @apiParam {Number} [data.field.id] Field Id (If field already created and needs to be edited)
@@ -140,7 +140,7 @@
  * @apiGroup 5. Settings
  * @apiVersion 0.0.1
  *
- * @apiDesc Returns All Dynamic user fields
+ * @apiDescription Returns All Dynamic user fields
  *
  * @apiUse FieldsResponse
  * @apiUse Secured

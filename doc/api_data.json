@@ -272,11 +272,115 @@
     }
   },
   {
+    "type": "get",
+    "url": "/user/config",
+    "title": "6. Get User Config",
+    "description": "<p>Get Fields, Accounts, pages and etc...</p>",
+    "name": "GetToken",
+    "group": "2._User",
+    "version": "0.0.1",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Obejct",
+            "optional": false,
+            "field": "data",
+            "description": "<p>Request Data</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.fields",
+            "description": "<p>User fields</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.fields.options",
+            "description": "<p>User field Options</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.pages",
+            "description": "<p>User Pages</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Array",
+            "optional": false,
+            "field": "data.accounts",
+            "description": "<p>User Accounts</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n  \"data\": {\n    \"fields\": [],\n    \"pages\": [],\n    \"accounts\": [],\n  },\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "filename": "raw/auth.js",
+    "groupTitle": "2._User",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/user/config"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "post",
     "url": "/user",
     "title": "2. Get Current user",
     "name": "GetUser",
-    "group": "2._Authentication",
+    "group": "2._User",
     "description": "<p>Used for token validation. If token is incorrect then this returns 401 Unauthentiacated</p>",
     "version": "0.0.1",
     "success": {
@@ -356,7 +460,7 @@
       ]
     },
     "filename": "raw/auth.js",
-    "groupTitle": "2._Authentication",
+    "groupTitle": "2._User",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/user"
@@ -401,7 +505,7 @@
     "url": "/logout",
     "title": "3. Logout Current User",
     "name": "LogoutUser",
-    "group": "2._Authentication",
+    "group": "2._User",
     "version": "0.0.1",
     "success": {
       "fields": {
@@ -424,10 +528,99 @@
       ]
     },
     "filename": "raw/auth.js",
-    "groupTitle": "2._Authentication",
+    "groupTitle": "2._User",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/logout"
+      }
+    ],
+    "header": {
+      "fields": {
+        "Header": [
+          {
+            "group": "Header",
+            "type": "String",
+            "optional": false,
+            "field": "Authorization",
+            "defaultValue": "Bearer ",
+            "description": "<p>Bearer user token</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>Token incorrect or expired</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Unauthorized",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"status\": 401,\n  \"success\": false\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
+    "type": "get",
+    "url": "/user/save-token",
+    "title": "5. Save User Facebook Token",
+    "description": "<p>Saves facebook token in database</p>",
+    "name": "SaveFbToken",
+    "group": "2._User",
+    "version": "0.0.1",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "success",
+            "description": "<p>Request Success</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n  \"success\": true,\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Facebook token</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>Facebook User Account Id</p>"
+          }
+        ]
+      }
+    },
+    "filename": "raw/auth.js",
+    "groupTitle": "2._User",
+    "sampleRequest": [
+      {
+        "url": "https://davikar.ge/api/user/save-token"
       }
     ],
     "header": {
@@ -469,7 +662,7 @@
     "url": "/user/edit",
     "title": "4. User Settings",
     "name": "UserSetting",
-    "group": "2._Authentication",
+    "group": "2._User",
     "version": "0.0.1",
     "parameter": {
       "fields": {
@@ -558,7 +751,7 @@
       ]
     },
     "filename": "raw/auth.js",
-    "groupTitle": "2._Authentication",
+    "groupTitle": "2._User",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/user/edit"
@@ -634,7 +827,7 @@
     "title": "1. Login User by credentials",
     "description": "<p>Example Token: <code>d4uq1id9jynhne295dc758649859d5f940885287932f79xnytrrc97v</code></p>",
     "name": "bLoginUser",
-    "group": "2._Authentication",
+    "group": "2._User",
     "version": "0.0.1",
     "parameter": {
       "fields": {
@@ -659,7 +852,7 @@
       }
     },
     "filename": "raw/auth.js",
-    "groupTitle": "2._Authentication",
+    "groupTitle": "2._User",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/login"
@@ -802,8 +995,8 @@
     "url": "/page/config",
     "title": "1. Get Page Config",
     "description": "<p>Returns menu config, header config &amp; footer config.</p>",
-    "name": "PageConfig",
-    "group": "3._PageConfig",
+    "name": "Config",
+    "group": "3._Config",
     "version": "0.0.1",
     "success": {
       "fields": {
@@ -854,7 +1047,7 @@
       ]
     },
     "filename": "raw/config.js",
-    "groupTitle": "3._PageConfig",
+    "groupTitle": "3._Config",
     "sampleRequest": [
       {
         "url": "https://davikar.ge/api/page/config"
@@ -1192,6 +1385,7 @@
     "name": "Create/Edit_User_Fields",
     "group": "5._Settings",
     "version": "0.0.1",
+    "description": "<p>Create Or edit user fields, if field id is present then field will be edited If not field will be created</p>",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -1394,6 +1588,7 @@
     "name": "Get_User_Fields",
     "group": "5._Settings",
     "version": "0.0.1",
+    "description": "<p>Returns All Dynamic user fields</p>",
     "filename": "raw/api.js",
     "groupTitle": "5._Settings",
     "sampleRequest": [
